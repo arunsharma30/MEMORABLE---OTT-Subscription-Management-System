@@ -18,9 +18,9 @@ Memorable is a web-based OTT (Over-The-Top) streaming platform management system
 
 | Layer | Technology |
 |---|---|
-| Frontend | HTML, CSS, JavaScript (Vanilla) |
+| Frontend | HTML, CSS, JavaScript |
 | Backend | Node.js, Express.js |
-| Database | MySQL 9.x |
+| Database | MySQL |
 | Fonts | Google Fonts (Bebas Neue, DM Sans) |
 | API | REST API with JSON responses |
 
