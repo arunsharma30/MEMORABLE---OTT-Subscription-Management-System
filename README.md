@@ -234,5 +234,3 @@ This project was developed as a **DBMS Mini Project** to demonstrate:
 This project is built for educational purposes as part of a DBMS course mini project.
 
 ---
-
-> Made with ❤️ | DBMS Mini Project
