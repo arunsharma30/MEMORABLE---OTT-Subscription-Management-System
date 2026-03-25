@@ -183,6 +183,99 @@ FROM Payment
 WHERE Payment_Status = 'Completed';
 ```
 
+**5. Find users without subscription:**
+```sql
+SELECT * FROM user
+WHERE user_id NOT IN (SELECT user_id FROM subscription);
+```
+
+**6. Count users per plan:**
+```sql
+SELECT sp.plan_name, COUNT(*) AS total_users
+FROM subscription s
+JOIN subscription_plan sp ON s.plan_id = sp.plan_id
+GROUP BY sp.plan_name;
+```
+
+**7. Most popular plan:**
+```sql
+SELECT sp.plan_name, COUNT(*) AS users
+FROM subscription s
+JOIN subscription_plan sp ON s.plan_id = sp.plan_id
+GROUP BY sp.plan_name
+ORDER BY users DESC
+LIMIT 1;
+```
+
+**8. Most popular plan:**
+```sql
+SELECT sp.plan_name, COUNT(*) AS users
+FROM subscription s
+JOIN subscription_plan sp ON s.plan_id = sp.plan_id
+GROUP BY sp.plan_name
+ORDER BY users DESC
+LIMIT 1;
+```
+
+**9. Total revenue per plan:**
+```sql
+SELECT sp.plan_name, SUM(p.amount) AS revenue
+FROM payment p
+JOIN subscription s ON p.subscription_id = s.subscription_id
+JOIN subscription_plan sp ON s.plan_id = sp.plan_id
+GROUP BY sp.plan_name;
+```
+
+**10. User payment history:**
+```sql
+SELECT u.name, sp.plan_name, p.amount, p.payment_date
+FROM payment p
+JOIN subscription s ON p.subscription_id = s.subscription_id
+JOIN subscription_plan sp ON s.plan_id = sp.plan_id
+JOIN user u ON s.user_id = u.user_id
+ORDER BY p.payment_date DESC;
+```
+
+**11. What user watched:**
+```sql
+SELECT u.name, c.title, w.watch_date
+FROM watch_history w
+JOIN user u ON w.user_id = u.user_id
+JOIN content c ON w.content_id = c.content_id;
+```
+
+**12. Most watched content:**
+```sql
+SELECT c.title, COUNT(*) AS views
+FROM watch_history w
+JOIN content c ON w.content_id = c.content_id
+GROUP BY c.title
+ORDER BY views DESC;
+```
+
+**13. Movies by genre:**
+```sql
+SELECT genre, COUNT(*) AS total
+FROM content
+GROUP BY genre;
+```
+
+**14. Highest paying users:**
+```sql
+SELECT u.name, SUM(p.amount) AS total_spent
+FROM payment p
+JOIN subscription s ON p.subscription_id = s.subscription_id
+JOIN user u ON s.user_id = u.user_id
+GROUP BY u.name
+ORDER BY total_spent DESC;
+```
+
+**15. Check current subscription of a user:**
+```sql
+SELECT * FROM subscription
+WHERE user_id = 1 AND status = 'active';
+```
+
 ---
 
 ## Features
